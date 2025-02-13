@@ -113,13 +113,15 @@ def apagar_avaliacao_disciplina():
         conn = conectar_bd()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM avaliacoes WHERE disciplina_id IN (SELECT id FROM disciplinas WHERE nome = ?)", (disciplina_nome,))
+        cursor.execute("DELETE FROM disciplinas WHERE nome = ?", (disciplina_nome,))
+        
         conn.commit()
         conn.close()
-        messagebox.showinfo("Sucesso", "Avaliação da disciplina apagada!")
+        messagebox.showinfo("Sucesso", "Disciplina e suas avaliações apagadas com sucesso!")
         janela_apagar.destroy()
    
     janela_apagar = tk.Toplevel()
-    janela_apagar.title("Apagar Avaliação de Disciplina")
+    janela_apagar.title("Apagar Disciplina")
    
     tk.Label(janela_apagar, text="Nome da Disciplina").grid(row=0, column=0)
     entry_nome = tk.Entry(janela_apagar)
@@ -133,13 +135,15 @@ def apagar_avaliacao_professor():
         conn = conectar_bd()
         cursor = conn.cursor()
         cursor.execute("DELETE FROM avaliacoes WHERE professor_id IN (SELECT id FROM professores WHERE nome = ?)", (professor_nome,))
+        cursor.execute("DELETE FROM professores WHERE nome = ?", (professor_nome,))
+        
         conn.commit()
         conn.close()
-        messagebox.showinfo("Sucesso", "Avaliação do professor apagada!")
+        messagebox.showinfo("Sucesso", "Professor e suas avaliações apagadas com sucesso!")
         janela_apagar.destroy()
    
     janela_apagar = tk.Toplevel()
-    janela_apagar.title("Apagar Avaliação de Professor")
+    janela_apagar.title("Apagar Professor")
    
     tk.Label(janela_apagar, text="Nome do Professor").grid(row=0, column=0)
     entry_nome = tk.Entry(janela_apagar)
